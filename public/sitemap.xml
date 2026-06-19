@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://qraft.studio/</loc>
+    <loc>https://qr.antss.in/</loc>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url><loc>https://qraft.studio/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://qraft.studio/contact.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://qraft.studio/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://qraft.studio/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://qr.antss.in/about.html</loc><lastmod>2026-06-19</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://qr.antss.in/contact.html</loc><lastmod>2026-06-19</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://qr.antss.in/privacy.html</loc><lastmod>2026-06-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://qr.antss.in/terms.html</loc><lastmod>2026-06-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

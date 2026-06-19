@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qraft.studio/sitemap.xml
+Sitemap: https://qr.antss.in/sitemap.xml

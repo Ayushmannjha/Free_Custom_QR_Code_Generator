@@ -33,7 +33,7 @@ const TEMPLATES = [
 ]
 
 const DEFAULT_SETTINGS = {
-  value: 'https://qraft.studio/hello', fg: '#17231b', bg: '#ffffff',
+  value: 'https://qr.antss.in/', fg: '#17231b', bg: '#ffffff',
   dot: 'rounded', corner: 'extra-rounded', size: 320, margin: 12, level: 'H', image: '',
 }
 
