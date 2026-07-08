@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background: #f7f5ef;
+  color: #17231b;
+}
+
+.dark body {
+  background: #0c0a09;
+  color: #fafaf9;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  outline-offset: 3px;
+}
+
+.prose-content {
+  color: #44403c;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.dark .prose-content {
+  color: #d6d3d1;
+}
+
+.prose-content h1,
+.prose-content h2,
+.prose-content h3 {
+  color: #17231b;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.dark .prose-content h1,
+.dark .prose-content h2,
+.dark .prose-content h3 {
+  color: #ffffff;
+}
+
+.prose-content h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  letter-spacing: -0.04em;
+}
+
+.prose-content h2 {
+  margin: 2.4rem 0 0.8rem;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  letter-spacing: -0.02em;
+}
+
+.prose-content h3 {
+  margin: 1.6rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.prose-content p {
+  margin: 0.9rem 0;
+}
+
