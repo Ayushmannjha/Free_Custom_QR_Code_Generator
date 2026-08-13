@@ -12,11 +12,13 @@
   "dependencies": {
     "@next/mdx": "latest",
     "@tailwindcss/postcss": "latest",
+    "jsqr": "^1.4.0",
     "lucide-react": "latest",
     "next": "latest",
     "qr-code-styling": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@types/node": "latest",

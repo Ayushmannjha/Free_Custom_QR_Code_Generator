@@ -67,6 +67,10 @@ export function QRStudio() {
   const [template, setTemplate] = useState(templates[0])
   const [tab, setTab] = useState<'url' | 'text'>('url')
   const [history, setHistory] = useState<{ value: string; fg: string; time: string }[]>([])
+  const [qrUploadStatus, setQrUploadStatus] = useState<{ type: 'idle' | 'loading' | 'success' | 'error'; message: string }>({
+    type: 'idle',
+    message: '',
+  })
   const previewRef = useRef<HTMLDivElement | null>(null)
   const qrRef = useRef<QRCodeStyling | null>(null)
 
@@ -115,6 +119,39 @@ export function QRStudio() {
     reader.readAsDataURL(file)
   }
 
+  const handleQrUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+
+    if (!file) return
+
+    setQrUploadStatus({ type: 'loading', message: 'Reading QR image...' })
+
+    const formData = new FormData()
+    formData.append('qr', file)
+
+    try {
+      const response = await fetch('/api/qr/decode', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const result = (await response.json()) as { data?: string; error?: string }
+
+      if (!response.ok || !result.data) {
+        setQrUploadStatus({ type: 'error', message: result.error || 'Could not read that QR image.' })
+        return
+      }
+
+      const decodedData = result.data
+      setTab(decodedData.startsWith('http://') || decodedData.startsWith('https://') ? 'url' : 'text')
+      setSettings((current) => ({ ...current, value: decodedData }))
+      setQrUploadStatus({ type: 'success', message: 'QR imported. Customize it below.' })
+    } catch {
+      setQrUploadStatus({ type: 'error', message: 'Could not upload that QR image.' })
+    }
+  }
+
   const download = (extension: 'png' | 'svg') => {
     qrRef.current?.download({ name: 'qraft-qr-code', extension })
     setHistory((items) => [{ value: settings.value, fg: settings.fg, time: 'Just now' }, ...items].slice(0, 3))
@@ -129,6 +166,28 @@ export function QRStudio() {
             <h2 className="font-display text-3xl text-ink">What should your QR code open?</h2>
             <p className="mt-1 text-sm text-stone-600">Paste a destination, write plain text, or prepare a value for a QR type page.</p>
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-dashed border-stone-300 bg-stone-50 p-4">
+          <div className="grid gap-4">
+            <div>
+              <h3 className="text-sm font-black text-ink">Customize an existing QR</h3>
+              <p className="mt-1 text-sm text-stone-600">Upload a QR image to import its destination, then restyle the new QR preview.</p>
+            </div>
+            <label className="flex min-h-16 cursor-pointer items-center justify-center gap-3 rounded-xl border border-ink bg-white px-4 text-sm font-black text-ink shadow-sm hover:bg-lime/40">
+              <span className="grid size-9 place-items-center rounded-lg bg-ink text-white">
+                <Upload size={19} />
+              </span>
+              <span>{qrUploadStatus.type === 'loading' ? 'Reading QR image...' : 'Click to upload QR image'}</span>
+              <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" onChange={handleQrUpload} className="hidden" disabled={qrUploadStatus.type === 'loading'} />
+            </label>
+          </div>
+          {qrUploadStatus.message ? (
+            <p className={`mt-3 flex items-center gap-2 text-sm ${qrUploadStatus.type === 'error' ? 'text-red-700' : 'text-moss'}`}>
+              {qrUploadStatus.type === 'error' ? <X size={15} /> : <Check size={15} />}
+              {qrUploadStatus.message}
+            </p>
+          ) : null}
         </div>
 
         <div className="grid rounded-xl bg-stone-100 p-1 sm:grid-cols-2">
@@ -285,4 +344,3 @@ function RangeInput({ label, value, min, max, suffix, onChange }: { label: strin
     </label>
   )
 }
-
