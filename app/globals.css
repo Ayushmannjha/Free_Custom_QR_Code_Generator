@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   color-scheme: light;
 }
@@ -79,4 +81,3 @@ a {
 .prose-content p {
   margin: 0.9rem 0;
 }
-
